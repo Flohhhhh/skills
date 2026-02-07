@@ -1,22 +1,15 @@
-# SKILL.md — UploadThing
-
+---
+name: uploadthing-nextjs
+description: Type-safe file upload integration for Next.js App Router using UploadThing. Use when implementing secure file uploads with client-to-storage direct uploads, authentication middleware, upload completion handlers, and automatic database metadata storage.
 ---
 
-## Overview
+# UploadThing Integration (Next.js)
 
 UploadThing provides a **type-safe, direct-to-storage file upload system** designed for modern TypeScript web apps.
 
-It allows applications to:
-
-- Upload files directly from the client (reducing server load)
-- Define upload rules using route-based configurations
-- Enforce authentication and validation during upload
-- Run server-side logic after upload completes
-- Store file metadata safely in your database
-
 ---
 
-## When To Use UploadThing
+## When To Use
 
 Use UploadThing when your application needs:
 
@@ -28,7 +21,7 @@ Use UploadThing when your application needs:
 
 ---
 
-## When NOT To Use UploadThing
+## When NOT To Use
 
 Avoid or reconsider if:
 
@@ -106,9 +99,7 @@ Used for:
 
 ---
 
-## Setup Workflow (High Level)
-
-### Step 1 — Install UploadThing Packages
+## Installation
 
 ```bash
 npm install uploadthing @uploadthing/react
@@ -116,7 +107,7 @@ npm install uploadthing @uploadthing/react
 
 ---
 
-### Step 2 — Configure Environment Variables
+## Environment Variables
 
 ```bash
 # .env
@@ -126,13 +117,27 @@ UPLOADTHING_APP_ID=your_app_id
 
 ---
 
-## Implementation Guide (Next.js App Router Example)
+## Suggested File Structure
+
+```
+app/
+  api/
+    uploadthing/
+      core.ts        # File router definition
+      route.ts       # API route handlers
+src/
+  utils/
+    uploadthing.ts   # Typed components
+  components/
+    upload-button.tsx
+.env                 # UploadThing credentials
+```
 
 ---
 
-### Step 3 — Create File Router
+## File Router
 
-Location example: `app/api/uploadthing/core.ts`
+**Location:** `app/api/uploadthing/core.ts`
 
 ```typescript
 import { createUploadthing, type FileRouter } from "uploadthing/next";
@@ -160,9 +165,9 @@ export type OurFileRouter = typeof uploadRouter;
 
 ---
 
-### Step 4 — Create Route Handler
+## Route Handler
 
-Location example: `app/api/uploadthing/route.ts`
+**Location:** `app/api/uploadthing/route.ts`
 
 ```typescript
 import { createRouteHandler } from "uploadthing/next";
@@ -175,9 +180,9 @@ export const { GET, POST } = createRouteHandler({
 
 ---
 
-### Step 5 — Generate Typed Client Upload Components
+## Typed Upload Components
 
-Location example: `src/utils/uploadthing.ts`
+**Location:** `src/utils/uploadthing.ts`
 
 ```typescript
 import {
@@ -192,7 +197,7 @@ export const UploadDropzone = generateUploadDropzone<OurFileRouter>();
 
 ---
 
-### Step 6 — Use Upload Components in UI
+## Using Upload Components
 
 ```typescript
 "use client";
@@ -352,21 +357,13 @@ export async function getPrivateFileUrl(fileKey: string) {
 
 ---
 
-## Suggested File Structure
+## Summary
 
-```
-app/
-  api/
-    uploadthing/
-      core.ts        # File router definition
-      route.ts       # API route handlers
-src/
-  utils/
-    uploadthing.ts   # Typed components
-  components/
-    upload-button.tsx
-.env                 # UploadThing credentials
-```
+**UploadThing** manages file uploads and storage.
+
+**Next.js** provides routing and integration surfaces.
+
+Keep upload rules in the file router. Keep authorization in middleware. Keep file metadata in your database.
 
 ---
 
