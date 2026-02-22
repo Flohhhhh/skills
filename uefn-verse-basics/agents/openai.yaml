@@ -1,0 +1,4 @@
+interface:
+  display_name: "UEFN Verse Basics"
+  short_description: "Bootstrap and test Verse in UEFN quickly"
+  default_prompt: "Use $uefn-verse-basics to set up, run, and troubleshoot a first UEFN Verse workflow."

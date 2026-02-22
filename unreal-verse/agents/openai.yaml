@@ -1,0 +1,4 @@
+interface:
+  display_name: "Unreal Verse (UEFN)"
+  short_description: "Build and debug Verse for UEFN projects"
+  default_prompt: "Use $unreal-verse to implement or fix UEFN Verse code with official Epic patterns."
